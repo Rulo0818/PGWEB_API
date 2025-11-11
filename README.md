@@ -2,5 +2,5 @@
 proyecto api-crud-escalable-ts
 
 ____________
-Añadido estructura basida de nodeJs
+Añadido estructura basica de nodeJs
 
