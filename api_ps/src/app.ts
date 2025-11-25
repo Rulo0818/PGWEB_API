@@ -50,13 +50,13 @@ const startServer = async () => {
         // Inicializar conexión a la base de datos
         if (!appDataSource.isInitialized) {
             await appDataSource.initialize();
-            console.log("✅ Data source inicializado correctamente");
+            console.log("✅ Base de datos conectada correctamente");
+            console.log("✅ Tablas sincronizadas (si no existían, se crearon automáticamente)");
         }
 
         // Iniciar servidor
         app.listen(PORT, () => {
             console.log(`Servidor corriendo en http://localhost:${PORT}`);
-
         });
     } catch (error) {
         console.error("Error al iniciar el servidor:", error);

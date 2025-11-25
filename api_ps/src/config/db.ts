@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import * as dotenv from "dotenv";
 import { DataSource } from "typeorm";
+import { User } from "../entities/user";
 dotenv.config();
 
 export const appDataSource = new DataSource({
@@ -10,17 +11,9 @@ export const appDataSource = new DataSource({
     username: process.env.DB_USERNAME || "root",
     password: process.env.DB_PASSWORD || "",
     database: process.env.DB_NAME || "db_api_crud",
-    synchronize: true,    
+    synchronize: true,    // 
     logging: false,
-    entities: [__dirname + "/../entities/*.ts"],    
+    entities: [User],   
     migrations: [__dirname + "/../migrations/*.ts"],
     subscribers: [__dirname + "/../subscribers/*.ts"],
 });
-appDataSource.initialize()
-    .then(()=>{
-        console.log ("Data source ahas been initialized");
-    })
-    .catch((err)=>{
-        console.error("Error during data source initialization:", err);
-    
-    });
