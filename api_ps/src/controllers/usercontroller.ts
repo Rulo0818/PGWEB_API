@@ -56,12 +56,22 @@ export class UserController {
 
     async createUser(req: Request, res: Response): Promise<void> {
         try {
-            const { name, lastName, age } = req.body;
+            const { name, lastName, email, age } = req.body;
 
-            if (!name || !lastName || !age) {
+            if (!name || !lastName || !email || !age) {
                 res.status(400).json({
                     success: false,
-                    message: "Faltan campos requeridos: name, lastName, age"
+                    message: "Faltan campos requeridos: name, lastName, email, age"
+                });
+                return;
+            }
+
+            // Validar formato de email básico
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                res.status(400).json({
+                    success: false,
+                    message: "El formato del email no es válido"
                 });
                 return;
             }
@@ -69,6 +79,7 @@ export class UserController {
             const userData: Partial<User> = {
                 name,
                 lastName,
+                email,
                 age: parseInt(age)
             };
 
@@ -98,11 +109,23 @@ export class UserController {
                 return;
             }
 
-            const { name, lastName, age } = req.body;
+            const { name, lastName, email, age } = req.body;
             const userData: Partial<User> = {};
 
             if (name) userData.name = name;
             if (lastName) userData.lastName = lastName;
+            if (email) {
+                // Validar formato de email si se proporciona
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    res.status(400).json({
+                        success: false,
+                        message: "El formato del email no es válido"
+                    });
+                    return;
+                }
+                userData.email = email;
+            }
             if (age) userData.age = parseInt(age);
 
             const updatedUser = await userService.updateuser(id, userData);
