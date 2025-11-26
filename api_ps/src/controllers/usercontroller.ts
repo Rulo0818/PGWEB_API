@@ -23,7 +23,16 @@ export class UserController {
 
     async getUserById(req: Request, res: Response): Promise<void> {
         try {
-            const id = parseInt(req.params.id);
+            const idParam = req.params.id;
+            if (!idParam) {
+                res.status(400).json({
+                    success: false,
+                    message: "ID inválido"
+                });
+                return;
+            }
+
+            const id = parseInt(idParam, 10);
             if (isNaN(id)) {
                 res.status(400).json({
                     success: false,
@@ -100,7 +109,16 @@ export class UserController {
 
     async updateUser(req: Request, res: Response): Promise<void> {
         try {
-            const id = parseInt(req.params.id);
+            const idParam = req.params.id;
+            if (!idParam) {
+                res.status(400).json({
+                    success: false,
+                    message: "ID inválido"
+                });
+                return;
+            }
+
+            const id = parseInt(idParam, 10);
             if (isNaN(id)) {
                 res.status(400).json({
                     success: false,
@@ -153,7 +171,16 @@ export class UserController {
 
     async deleteUser(req: Request, res: Response): Promise<void> {
         try {
-            const id = parseInt(req.params.id);
+            const idParam = req.params.id;
+            if (!idParam) {
+                res.status(400).json({
+                    success: false,
+                    message: "ID inválido"
+                });
+                return;
+            }
+
+            const id = parseInt(idParam, 10);
             if (isNaN(id)) {
                 res.status(400).json({
                     success: false,
