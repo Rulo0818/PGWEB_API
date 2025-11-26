@@ -50,8 +50,8 @@ const startServer = async () => {
         // Inicializar conexión a la base de datos
         if (!appDataSource.isInitialized) {
             await appDataSource.initialize();
-            console.log("✅ Base de datos conectada correctamente");
-            console.log("✅ Tablas sincronizadas (si no existían, se crearon automáticamente)");
+            console.log("Base de datos conectada correctamente");
+            console.log("Tablas sincronizadas");
         }
 
         // Iniciar servidor

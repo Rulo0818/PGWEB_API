@@ -1,10 +1,13 @@
 import { Router } from "express";
 import userRoutes from "./userroutes";
+import notificacionesRoutes from "./notificacionesroutes";
+import alertasRoutes from "./alertasroutes";
 
 const router = Router();
 
-// Rutas principales
 router.use("/users", userRoutes);
+router.use("/notificaciones", notificacionesRoutes);
+router.use("/alertas", alertasRoutes);
 
 // Ruta de prueba
 router.get("/", (req, res) => {
@@ -16,4 +19,3 @@ router.get("/", (req, res) => {
 });
 
 export default router;
-
